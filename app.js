@@ -1,3 +1,4 @@
+require('./config.js');
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -9,6 +10,18 @@ var usersRouter = require('./routes/users');
 var dishRouter = require('./routes/dishRouter');
 var promoRouter = require('./routes/promoRouter');
 var leaderRouter = require('./routes/leaderRouter');
+
+const mongoose = require('mongoose');
+
+const Dishes = require('./models/dishes');
+
+const dbname = 'conFusion';
+const url = `mongodb+srv://conFusion:${DB_PASS}@confusion.lnvgz.mongodb.net/${dbname}?retryWrites=true&w=majority`
+const connect = mongoose.connect(url);
+
+connect.then((db) => {
+    console.log("Connected correctly to server");
+}, (err) => { console.log(err); });
 
 var app = express();
 
